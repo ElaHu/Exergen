@@ -32,10 +32,27 @@
 }
 +(NSString *)timeAnalyse:(NSData *)data{
 
-    return nil;
+    Byte *byte = (Byte *)[data bytes];
+
+    NSString *timeStr =[NSString stringWithFormat:@"20%02d-%02d-%02d %02d:%02d",byte[0],byte[1],byte[2],byte[3],byte[4]];
+
+    return timeStr;
 }
 +(NSString *)tempAnalyse:(NSData *)data{
 
+
+    Byte *byte = (Byte *)[data bytes];
+
+    int a=*byte*16*16;
+    int b =*++byte;
+    int temp =a+b;
+
+    NSLog(@"温度是：%d",temp);
+
+    return [NSString stringWithFormat:@"%d",temp/100.0];
+
+}
++(NSString *)electriAnalyse:(NSData *)data{
     return nil;
 }
 @end

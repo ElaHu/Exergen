@@ -221,7 +221,7 @@ static int i = 0;
 
     NSLog(@"************ %@",characteristic);
     NSLog(@"------------ %@",characteristic.value);
-    //电量和历史数据的刷新
+
     if (characteristic.value != nil) {
 
         NSData *data = [NSData dataWithData:characteristic.value];
@@ -229,27 +229,48 @@ static int i = 0;
         Byte * instructByte =(Byte *) [instructData bytes];
 
         if (*instructByte == NormalElectric) {
+            NSLog(@"电压正常");
 
         }else if (*instructByte == LowerElectric){
 
+            NSLog(@"温度过低");
+
         }else if(*instructByte == NOElectric){
 
+            NSLog(@"没电");
         }else if (*instructByte == NormalTemp){
+            NSLog(@"温度正常");
+            NSData * timeData = [data subdataWithRange:NSMakeRange(2, 7)];
+            NSData * tempData = [data subdataWithRange:NSMakeRange(8, 2)];
+            
+            NSLog(@"time:%@--temp:%@",[Instruction timeAnalyse:timeData],[Instruction tempAnalyse:tempData]);
 
         }else if (*instructByte == LowerTemp){
+            NSLog(@"温度过低");
+
+            NSData * timeData = [data subdataWithRange:NSMakeRange(2, 7)];
+            NSData * tempData = [data subdataWithRange:NSMakeRange(8, 2)];
+
+            NSLog(@"time:%@--temp:%@",[Instruction timeAnalyse:timeData],[Instruction tempAnalyse:tempData]);
 
         }else if (*instructByte == NaturalHigher){
-
+            NSLog(@"环境温度过高");
         }else if(*instructByte == NaturalLower){
 
+            NSLog(@"环境温度过低");
         }else if (*instructByte ==errorMsg){
+            NSLog(@"硬件错误");
 
         }else if (*instructByte == UnitRight){
 
+            NSLog(@"单位设置成功");
+            
         }else if(*instructByte == UnitCorrect){
 
+            NSLog(@"单位设置失败");
         }else if (*instructByte == DataError){
 
+            NSLog(@"指令错误");
         }
 //        NSLog(@"\\\\\\\\\\\\\\\\\\\%@",characteristic.value);
         //有用传出去特征值

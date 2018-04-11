@@ -31,7 +31,15 @@
     }
     self.manager.delegate = self;
 
-    
+    //18-04-11 17：50：50 36.55
+//      <fefd1204 0b120d05 0000880d 0a>
+
+    NSData * data = [Tool dataForHexString:@"FEFD12040b1142420E47800D0A"];
+    NSData * timeData = [data subdataWithRange:NSMakeRange(2, 7)];
+    NSData * tempData = [data subdataWithRange:NSMakeRange(8, 2)];
+
+    NSLog(@"time:%@--temp:%@",[Instruction timeAnalyse:timeData],[Instruction tempAnalyse:tempData]);
+
 }
 - (void)buttonClick:(UIButton *)sender{
     [self.manager Scan];

@@ -36,5 +36,5 @@
 //从硬件获取出来的时间解析
 +(NSString *)timeAnalyse:(NSData *)data;
 +(NSString *)tempAnalyse:(NSData *)data;
-
++(NSString *)electricAnalyse:(NSData *)data;
 @end
