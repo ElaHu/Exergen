@@ -1,0 +1,23 @@
+//
+//  BabyWand-PrefixHeader.pch
+//  BabyWand
+//
+//  Created by hu on 15/8/31.
+//  Copyright (c) 2015年 huweihong. All rights reserved.
+//
+
+#ifndef BabyWand_BabyWand_PrefixHeader_pch
+#define BabyWand_BabyWand_PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+#import "Instruction.h"
+#import "UIViewController+HUD.h"
+#import "Tool.h"
+#define MainScreenWidth [UIScreen mainScreen].bounds.size.width
+#define MainScreenHeight [UIScreen mainScreen].bounds.size.height
+#define iOS7 [[[UIDevice currentDevice] systemVersion] floatValue]>=7.0
+#define UPHEIGHT iOS7?(64):(44)
+#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
