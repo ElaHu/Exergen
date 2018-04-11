@@ -208,7 +208,6 @@ static int i = 0;
         NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[Instruction getNowDateString]];
         [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
 
-        
     }
 
     //此代理方法就是为了打印东西

@@ -49,7 +49,7 @@
 
     NSLog(@"温度是：%d",temp);
 
-    return [NSString stringWithFormat:@"%d",temp/100.0];
+    return [NSString stringWithFormat:@"%f",temp/100.0];
 
 }
 +(NSString *)electriAnalyse:(NSData *)data{
