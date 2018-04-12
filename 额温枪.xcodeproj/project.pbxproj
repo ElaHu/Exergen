@@ -45,6 +45,7 @@
 		8548B6F8207CAC4A00011BFC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8548B6FA207CACBF00011BFC /* CHCentralManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHCentralManager.h; sourceTree = "<group>"; };
 		8548B6FB207CACBF00011BFC /* CHCentralManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHCentralManager.m; sourceTree = "<group>"; };
+		8562527F207F6DED001984F0 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		8564736A1D1CD6FD0099620F /* SqlManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqlManager.h; sourceTree = "<group>"; };
 		8564736B1D1CD6FD0099620F /* SqlManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqlManager.m; sourceTree = "<group>"; };
 		8564736E1D1CD7190099620F /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		85DEE1861B9427CB00915E25 = {
 			isa = PBXGroup;
 			children = (
+				8562527F207F6DED001984F0 /* list.h */,
 				856473811D1CDB4F0099620F /* libsqlite3.tbd */,
 				8564736D1D1CD7190099620F /* FMDB */,
 				856473691D1CD6DC0099620F /* Tools */,
