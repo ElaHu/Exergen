@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#define  SERVICE_UUID     0xA55A
+#define Write_UUID @"01005970-6d75-4753-5053-676e6f6c7553"
+#define Observe_UUID @"02005970-6d75-4753-5053-676e6f6c7553"
+
+#define  SERVICE_UUID@"00005970-6d75-4753-5053-676e6f6c7553"
 
 @protocol CHCentralManagerDelegate <NSObject>
 

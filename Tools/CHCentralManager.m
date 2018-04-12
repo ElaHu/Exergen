@@ -117,6 +117,8 @@ static int i = 0;
 //扫描设备
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
+
+    NSLog(@"service_UUID--%@", [advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"]);
     if ([peripheral.name hasPrefix:HeaderName]) {
         NSLog(@"=======%@",peripheral);
         NSLog(@"&&&&&&&%@",advertisementData);
@@ -142,7 +144,7 @@ static int i = 0;
 //连接成功
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
-
+    NSLog(@"1111111连接成功");
     //这里可以进行名字的筛选
 
     if ([peripheral.name hasPrefix:@"CosbeautySS"]) {
@@ -159,6 +161,8 @@ static int i = 0;
 //连接失败
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
+    NSLog(@"1111111连接失败");
+
     //为了打印连接失败信息
     if (self.delegate &&[self.delegate respondsToSelector:@selector(failToConnectPeripheral:)]) {
         [self.delegate failToConnectPeripheral:peripheral];
@@ -181,6 +185,7 @@ static int i = 0;
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
 
+    NSLog(@"1111111蓝牙断开");
     if (self.delegate &&[self.delegate respondsToSelector:@selector(disconnectPeripheral:)]) {
         [self.delegate disconnectPeripheral:peripheral];
     }
@@ -189,17 +194,21 @@ static int i = 0;
 //已搜索到Characteristics
 -(void) peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
 
+    NSLog(@"%@",service.characteristics);
     for (CBCharacteristic * c in service.characteristics) {
-        //非常重要没有这句话无法调用下面的代理方法
-        [peripheral setNotifyValue:YES forCharacteristic:c];
-        _writeCharacter = c;
-        self.discovedPeripheral = peripheral;
+        if ([[c.UUID.UUIDString uppercaseString] isEqualToString: Write_UUID]) {
+            //非常重要没有这句话无法调用下面的代理方法
+            [peripheral setNotifyValue:YES forCharacteristic:c];
+            _writeCharacter = c;
+            self.discovedPeripheral = peripheral;
 
-        //发送时间
-        NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
-        NSLog(@"上传时间字符串=====%@",timeStr);
+            //发送时间
+            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
+            NSLog(@"上传时间字符串=====%@",timeStr);
 
-        [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
+            [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
+
+        }
 
     }
 
