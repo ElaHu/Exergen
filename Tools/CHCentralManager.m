@@ -267,6 +267,7 @@ static int i = 0;
 
                     NSLog(@"应答指令--%@",[Tool dataForHexString:[NSString stringWithFormat:@"FEFD%@5A0D0A",[CHInstruction getNowDateString]]]);
                     [self sendMessage:[Tool dataForHexString:[NSString stringWithFormat:@"FEFD%@5A0D0A",[CHInstruction getNowDateString]]]];
+                    self.histroryNum = 0;
                 }
 
 
