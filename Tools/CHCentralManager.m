@@ -206,7 +206,7 @@ static int i = 0;
 
             _writeCharacter = c;
 
-        //发送时间
+            //设置单位
             NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
             NSLog(@"上传时间字符串=====%@",timeStr);
 
