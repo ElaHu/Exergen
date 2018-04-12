@@ -16,8 +16,6 @@
     [formatter setDateFormat:@"yyMMddHHmmss"];
     NSString *currentDateStr = [formatter stringFromDate:[NSDate date]];
 
-    NSLog(@"%@",currentDateStr);
-
     NSMutableString * dateMutableStr = [[NSMutableString alloc]init];
     for (int i = 0; i < currentDateStr.length; i+=2) {
         NSString * subStr = [currentDateStr substringWithRange:NSMakeRange(i, 2)];

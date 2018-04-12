@@ -120,8 +120,6 @@ static int i = 0;
     if ([peripheral.name hasPrefix:HeaderName]) {
         NSLog(@"=======%@",peripheral);
         NSLog(@"&&&&&&&%@",advertisementData);
-
-
     }
     BOOL replace = NO;
     // Match if we have this device from before
@@ -158,12 +156,9 @@ static int i = 0;
     [peripheral discoverServices:nil];
 
 }
-//链接失败
+//连接失败
 -(void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-//    if ([peripheral.name hasPrefix:@"CosbeautySS"]) {
-//        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"Connected1"];
-//    }
     //为了打印连接失败信息
     if (self.delegate &&[self.delegate respondsToSelector:@selector(failToConnectPeripheral:)]) {
         [self.delegate failToConnectPeripheral:peripheral];
@@ -186,10 +181,6 @@ static int i = 0;
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
 
-
-    if ([peripheral.name hasPrefix:HeaderName]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"Connected3"];
-    }
     if (self.delegate &&[self.delegate respondsToSelector:@selector(disconnectPeripheral:)]) {
         [self.delegate disconnectPeripheral:peripheral];
     }
@@ -206,7 +197,7 @@ static int i = 0;
 
         //发送时间
         NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
-        NSLog(@"上传时间字符串^^^^^^^^^%@",timeStr);
+        NSLog(@"上传时间字符串=====%@",timeStr);
 
         [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
 
