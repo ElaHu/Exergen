@@ -27,6 +27,7 @@ static int i = 0;
 
         self.centralManager = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
         self.nDevices = [[NSMutableArray alloc]init];
+        self.histroryArray = [[NSMutableArray alloc]init];
 
     }
     return self;
@@ -206,7 +207,11 @@ static int i = 0;
             _writeCharacter = c;
 
             //            //发送时间
-            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
+//            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
+//            NSLog(@"上传时间字符串=====%@",timeStr);
+
+
+            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@5A0D0A",[CHInstruction getNowDateString]];
             NSLog(@"上传时间字符串=====%@",timeStr);
 
             [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
@@ -229,38 +234,25 @@ static int i = 0;
     NSLog(@"************ %@",characteristic);
     NSLog(@"------------ %@",characteristic.value);
 
-    if (characteristic.value != nil) {
+    if (characteristic.value != nil&& characteristic.value.length > 12) {
 
         NSData *data = [NSData dataWithData:characteristic.value];
         NSData *instructData = [data subdataWithRange:NSMakeRange(10, 1)];
         Byte * instructByte =(Byte *) [instructData bytes];
 
         if (*instructByte == HistoryNum) {
+
             NSLog(@"历史数据包数");
             self.histroryNum = [CHInstruction getHistroyNum:[data subdataWithRange:NSMakeRange(8, 2)]];
 
-        }else if (*instructByte == NormalElectric) {
+        }else if (*instructByte == NormalElectric ||*instructByte == LowerElectric) {
 
-            NSLog(@"电压正常");
-
-        }else if (*instructByte == LowerElectric){
-
-            NSLog(@"温度过低");
-
-        }else if(*instructByte == NOElectric){
-
-            NSLog(@"没电");
-
-        }else if (*instructByte == NormalTemp|| *instructByte == LowerTemp){
-
-
-            if (*instructByte == LowerTemp) {
-
-                NSLog(@"温度过低");
+            if (*instructByte == NormalElectric) {
+                NSLog(@"电压正常");
 
             }else{
 
-                NSLog(@"温度正常");
+                NSLog(@"电压过低");
 
             }
             NSData * timeData = [data subdataWithRange:NSMakeRange(2, 7)];
@@ -270,12 +262,37 @@ static int i = 0;
 
             if (self.histroryNum) {
 
+                NSString * dataStr =[NSString stringWithFormat:@"%@-%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]];
                 NSLog(@"历史数据 time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
+                [self.histroryArray addObject:dataStr];
+
+                if (self.histroryArray.count == self.histroryNum) {
+
+                    NSLog(@"应答指令--%@",[Tool dataForHexString:[NSString stringWithFormat:@"FEFD%@5A0D0A",[CHInstruction getNowDateString]]]);
+                    [self sendMessage:[Tool dataForHexString:[NSString stringWithFormat:@"FEFD%@5A0D0A",[CHInstruction getNowDateString]]]];
+                }
+
 
             }else{
 
+
                 NSLog(@"测量数据 time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
             }
+
+        }else if(*instructByte == NOElectric){
+
+            NSLog(@"没电");
+
+        }else if(*instructByte == LowerTemp){
+
+             NSLog(@"温度过低");
+
+        }else if (*instructByte == NormalTemp){
+
+
+            NSLog(@"温度正常");
+
+
 
         }else if (*instructByte == NaturalHigher){
             NSLog(@"环境温度过高");

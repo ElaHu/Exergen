@@ -43,6 +43,7 @@
 
 
 @property (nonatomic,assign) NSInteger histroryNum;
+@property (nonatomic,strong) NSMutableArray * histroryArray;
 @property (nonatomic,assign) id<CHCentralManagerDelegate>delegate;
 + (instancetype)shareManager;
 -(void)Scan;
