@@ -8,7 +8,7 @@
 
 #import "TempViewController.h"
 #import "CHCentralManager.h"
-@interface TempViewController ()<CBCentralManagerDelegate>
+@interface TempViewController ()<CHCentralManagerDelegate>
 @property (nonatomic, strong)CHCentralManager * manager;
 @end
 

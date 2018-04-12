@@ -43,7 +43,7 @@
 
 
 @property (nonatomic,assign) NSInteger histroryNum;
-@property (nonatomic,weak) id<CHCentralManagerDelegate>delegate;
+@property (nonatomic,assign) id<CHCentralManagerDelegate>delegate;
 + (instancetype)shareManager;
 -(void)Scan;
 -(void)sendMessage:(NSData *)data;

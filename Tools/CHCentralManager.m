@@ -153,6 +153,7 @@ static int i = 0;
     if (self.delegate && [self.delegate respondsToSelector:@selector(connectPeripheral:)]) {
         [self.delegate connectPeripheral:peripheral];
     }
+
     [peripheral setDelegate:self];
     [peripheral discoverServices:nil];
 
@@ -202,11 +203,11 @@ static int i = 0;
             _writeCharacter = c;
             self.discovedPeripheral = peripheral;
 
-            //发送时间
-//            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
-//            NSLog(@"上传时间字符串=====%@",timeStr);
-//
-//            [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
+//            //发送时间
+            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
+            NSLog(@"上传时间字符串=====%@",timeStr);
+
+            [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
 
         }
 
@@ -217,9 +218,17 @@ static int i = 0;
         [self.delegate peripheral:peripheral discoverCharacteristicsForService:service];
     }
 }
+
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
 
+    NSLog(@"11************ %@",characteristic);
+    NSLog(@"11------------ %@",characteristic.value);
+
+}
+//中心读取外设实时数据
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
     NSLog(@"************ %@",characteristic);
     NSLog(@"------------ %@",characteristic.value);
 
@@ -283,7 +292,7 @@ static int i = 0;
         }else if (*instructByte == UnitRight){
 
             NSLog(@"单位设置成功");
-            
+
         }else if(*instructByte == UnitCorrect){
 
             NSLog(@"单位设置失败");
@@ -292,16 +301,12 @@ static int i = 0;
             NSLog(@"指令错误");
 
         }
-//        NSLog(@"\\\\\\\\\\\\\\\\\\\%@",characteristic.value);
+        //        NSLog(@"\\\\\\\\\\\\\\\\\\\%@",characteristic.value);
         //有用传出去特征值
         if (self.delegate &&[self.delegate respondsToSelector:@selector(peripheral:updateValueForCharacteristic:)]) {
             [self.delegate peripheral:peripheral updateValueForCharacteristic:characteristic];
         }
     }
-}
-//中心读取外设实时数据
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
 
 }
 @end
