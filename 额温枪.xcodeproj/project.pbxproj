@@ -17,7 +17,7 @@
 		8564737D1D1CD7190099620F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 856473781D1CD7190099620F /* FMResultSet.m */; };
 		856473801D1CD72B0099620F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8564737F1D1CD72B0099620F /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		856473821D1CDB4F0099620F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 856473811D1CDB4F0099620F /* libsqlite3.tbd */; };
-		85885696207D8F9000FE176E /* Instruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 85885695207D8F9000FE176E /* Instruction.m */; };
+		85885696207D8F9000FE176E /* CHInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = 85885695207D8F9000FE176E /* CHInstruction.m */; };
 		85B642981B95794500E01B64 /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B642951B95794500E01B64 /* MBProgressHUD+Add.m */; };
 		85B642991B95794500E01B64 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 85B642971B95794500E01B64 /* MBProgressHUD.m */; };
 		85B6429B1B9579BD00E01B64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85B6429A1B9579BD00E01B64 /* Foundation.framework */; };
@@ -61,8 +61,8 @@
 		8564737E1D1CD72B0099620F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		8564737F1D1CD72B0099620F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		856473811D1CDB4F0099620F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		85885694207D8F9000FE176E /* Instruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Instruction.h; sourceTree = "<group>"; };
-		85885695207D8F9000FE176E /* Instruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Instruction.m; sourceTree = "<group>"; };
+		85885694207D8F9000FE176E /* CHInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHInstruction.h; sourceTree = "<group>"; };
+		85885695207D8F9000FE176E /* CHInstruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHInstruction.m; sourceTree = "<group>"; };
 		85B642941B95794500E01B64 /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		85B642951B95794500E01B64 /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		85B642961B95794500E01B64 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -115,8 +115,8 @@
 				8564736B1D1CD6FD0099620F /* SqlManager.m */,
 				8548B6FA207CACBF00011BFC /* CHCentralManager.h */,
 				8548B6FB207CACBF00011BFC /* CHCentralManager.m */,
-				85885694207D8F9000FE176E /* Instruction.h */,
-				85885695207D8F9000FE176E /* Instruction.m */,
+				85885694207D8F9000FE176E /* CHInstruction.h */,
+				85885695207D8F9000FE176E /* CHInstruction.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -323,7 +323,7 @@
 				85B642981B95794500E01B64 /* MBProgressHUD+Add.m in Sources */,
 				856473791D1CD7190099620F /* FMDatabase.m in Sources */,
 				856473801D1CD72B0099620F /* JSONKit.m in Sources */,
-				85885696207D8F9000FE176E /* Instruction.m in Sources */,
+				85885696207D8F9000FE176E /* CHInstruction.m in Sources */,
 				85B86ECD207CB95A00B2D706 /* TempViewController.m in Sources */,
 				8564737C1D1CD7190099620F /* FMDatabaseQueue.m in Sources */,
 				8564737D1D1CD7190099620F /* FMResultSet.m in Sources */,
@@ -394,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -431,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -449,7 +449,7 @@
 				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$SRCROOT/BabyWand/BabyWand-PrefixHeader.pch";
 				INFOPLIST_FILE = BabyWand/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.comper.test;
 				PRODUCT_NAME = "额温枪";
@@ -469,7 +469,7 @@
 				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = "$SRCROOT/BabyWand/BabyWand-PrefixHeader.pch";
 				INFOPLIST_FILE = BabyWand/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.comper.test;
 				PRODUCT_NAME = "额温枪";

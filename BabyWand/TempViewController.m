@@ -43,12 +43,12 @@
 
     if (sender.tag == 1) {
         //摄氏度
-        NSString * Cstring = [NSString stringWithFormat:@"FEFD%@1A0D0A",[Instruction getNowDateString]];
+        NSString * Cstring = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
         [[CHCentralManager shareManager]sendMessage:[Tool dataForHexString:Cstring]];
     }else if(sender.tag == 2){
 
         //华氏度
-        NSString * Fstring = [NSString stringWithFormat:@"FEFD%@150D0A",[Instruction getNowDateString]];
+        NSString * Fstring = [NSString stringWithFormat:@"FEFD%@150D0A",[CHInstruction getNowDateString]];
         [[CHCentralManager shareManager]sendMessage:[Tool dataForHexString:Fstring]];
         
     }

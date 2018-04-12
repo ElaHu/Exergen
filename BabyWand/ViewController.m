@@ -38,7 +38,7 @@
     NSData * timeData = [data subdataWithRange:NSMakeRange(2, 7)];
     NSData * tempData = [data subdataWithRange:NSMakeRange(8, 2)];
 
-    NSLog(@"time:%@--temp:%@",[Instruction timeAnalyse:timeData],[Instruction tempAnalyse:tempData]);
+    NSLog(@"time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
 
 }
 - (void)buttonClick:(UIButton *)sender{

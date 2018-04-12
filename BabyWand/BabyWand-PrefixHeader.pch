@@ -13,7 +13,7 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #endif
-#import "Instruction.h"
+#import "CHInstruction.h"
 #import "UIViewController+HUD.h"
 #import "Tool.h"
 #define MainScreenWidth [UIScreen mainScreen].bounds.size.width

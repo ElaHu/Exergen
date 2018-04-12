@@ -6,9 +6,9 @@
 //  Copyright © 2018年 huweihong. All rights reserved.
 //
 
-#import "Instruction.h"
+#import "CHInstruction.h"
 
-@implementation Instruction
+@implementation CHInstruction
 +(NSString *)getNowDateString{
 
 //例如 18-04-11 09：23：24  转成16进制数据  12 04 0b 09 17 18
@@ -34,25 +34,28 @@
 
     Byte *byte = (Byte *)[data bytes];
 
-    NSString *timeStr =[NSString stringWithFormat:@"20%02d-%02d-%02d %02d:%02d",byte[0],byte[1],byte[2],byte[3],byte[4]];
+    NSString *timeStr =[NSString stringWithFormat:@"20%02d-%02d-%02d %02d:%02d:%02d",byte[0],byte[1],byte[2],byte[3],byte[4],byte[5]];
 
     return timeStr;
 }
 +(NSString *)tempAnalyse:(NSData *)data{
 
-
     Byte *byte = (Byte *)[data bytes];
-
     int a=*byte*16*16;
     int b =*++byte;
     int temp =a+b;
-
     NSLog(@"温度是：%d",temp);
-
     return [NSString stringWithFormat:@"%f",temp/100.0];
 
 }
-+(NSString *)electriAnalyse:(NSData *)data{
-    return nil;
++(NSInteger)getHistroyNum:(NSData *)data{
+
+    Byte *byte = (Byte *)[data bytes];
+    int a=*byte*16*16;
+    int b =*++byte;
+    int num =a+b;
+    NSLog(@"历史数据条数=======%d",num);
+    return num;
+    
 }
 @end

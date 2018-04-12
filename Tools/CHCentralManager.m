@@ -205,7 +205,7 @@ static int i = 0;
         self.discovedPeripheral = peripheral;
 
         //发送时间
-        NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[Instruction getNowDateString]];
+        NSString * timeStr = [NSString stringWithFormat:@"FEFD%@%d0D0A",[CHInstruction getNowDateString],sheshi];
         [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
 
     }
@@ -227,7 +227,12 @@ static int i = 0;
         NSData *instructData = [data subdataWithRange:NSMakeRange(10, 1)];
         Byte * instructByte =(Byte *) [instructData bytes];
 
-        if (*instructByte == NormalElectric) {
+        if (*instructByte == HistoryNum) {
+            NSLog(@"历史数据包数");
+            self.histroryNum = [CHInstruction getHistroyNum:[data subdataWithRange:NSMakeRange(8, 2)]];
+
+        }else if (*instructByte == NormalElectric) {
+
             NSLog(@"电压正常");
 
         }else if (*instructByte == LowerElectric){
@@ -237,23 +242,35 @@ static int i = 0;
         }else if(*instructByte == NOElectric){
 
             NSLog(@"没电");
-        }else if (*instructByte == NormalTemp){
-            NSLog(@"温度正常");
+
+        }else if (*instructByte == NormalTemp|| *instructByte == LowerTemp){
+
+
+            if (*instructByte == LowerTemp) {
+
+                NSLog(@"温度过低");
+
+            }else{
+
+                NSLog(@"温度正常");
+
+            }
             NSData * timeData = [data subdataWithRange:NSMakeRange(2, 7)];
             NSData * tempData = [data subdataWithRange:NSMakeRange(8, 2)];
-            
-            NSLog(@"time:%@--temp:%@",[Instruction timeAnalyse:timeData],[Instruction tempAnalyse:tempData]);
 
-        }else if (*instructByte == LowerTemp){
-            NSLog(@"温度过低");
+            NSLog(@"time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
 
-            NSData * timeData = [data subdataWithRange:NSMakeRange(2, 7)];
-            NSData * tempData = [data subdataWithRange:NSMakeRange(8, 2)];
+            if (self.histroryNum) {
 
-            NSLog(@"time:%@--temp:%@",[Instruction timeAnalyse:timeData],[Instruction tempAnalyse:tempData]);
+                NSLog(@"历史及数据 time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
+            }else{
+
+                NSLog(@"测量数据 time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
+            }
 
         }else if (*instructByte == NaturalHigher){
             NSLog(@"环境温度过高");
+
         }else if(*instructByte == NaturalLower){
 
             NSLog(@"环境温度过低");
@@ -270,13 +287,13 @@ static int i = 0;
         }else if (*instructByte == DataError){
 
             NSLog(@"指令错误");
+
         }
 //        NSLog(@"\\\\\\\\\\\\\\\\\\\%@",characteristic.value);
         //有用传出去特征值
         if (self.delegate &&[self.delegate respondsToSelector:@selector(peripheral:updateValueForCharacteristic:)]) {
             [self.delegate peripheral:peripheral updateValueForCharacteristic:characteristic];
         }
-
     }
 }
 //中心读取外设实时数据

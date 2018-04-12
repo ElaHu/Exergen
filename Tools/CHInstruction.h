@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define HeaderName @"CosbeautySS-"
+
+/*************软件接受硬件数据的特征值***********************/
 #define NormalElectric 0x80 //电压正常
 #define LowerElectric 0x81 //电压低
 #define NOElectric 0x82 //无电
@@ -20,6 +22,13 @@
 #define UnitRight 0x88 //单位设置成功
 #define UnitCorrect 0x89 //单位设置失败
 #define DataError 0x8A //数据格式错误
+#define HistoryNum 0x8B //历史数据包数
+/*************软件发送给硬件数据的特征值***********************/
+#define sheshi 0x1A
+#define huashi 0x15
+#define answer 0x5A
+
+
 
 /*** 4月11日更改****/
 //1.指令集合特征挪后
@@ -31,18 +40,27 @@
 /**4.11完成情况**/
 /*1.软件发送指令硬件已经能接受，并给予反馈。
  2.目前反馈的给软件是单位设置成功和单位设置失败
-
  */
 
 
+/******问题确认******/
+/*1.电池电量（春阳，晨曦）
+2.设备广播名称（王巍）
+3.mac地址（海全）
+4.连接上设备以后，响声音（向东）
+5.手动录入额温度 （向东有文档）
+ */
 
-@interface Instruction : NSObject
+
+@interface CHInstruction : NSObject
 //指令解析
-//上传给硬件的时间转换
+//上传给硬件的当前的时间
 +(NSString *)getNowDateString;
 
 //从硬件获取出来的时间解析
 +(NSString *)timeAnalyse:(NSData *)data;
+//从硬件获取出来的温度
 +(NSString *)tempAnalyse:(NSData *)data;
-+(NSString *)electricAnalyse:(NSData *)data;
+//获取历史数据包数
++(NSInteger)getHistroyNum:(NSData *)data;
 @end

@@ -38,6 +38,8 @@
 @property (nonatomic,strong) CBCharacteristic*writeCharacter;
 @property (nonatomic,strong) CBPeripheral*discovedPeripheral;//链接的设备
 
+
+@property (nonatomic,assign) NSInteger histroryNum;
 @property (nonatomic,weak) id<CHCentralManagerDelegate>delegate;
 + (instancetype)shareManager;
 -(void)Scan;
