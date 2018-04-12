@@ -23,10 +23,7 @@
 #define UnitCorrect 0x89 //单位设置失败
 #define DataError 0x8A //数据格式错误
 #define HistoryNum 0x8B //历史数据包数
-/*************软件发送给硬件数据的特征值***********************/
-#define sheshi 0x1A
-#define huashi 0x15
-#define answer 0x5A
+
 
 
 

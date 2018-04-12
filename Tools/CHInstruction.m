@@ -21,12 +21,8 @@
     NSMutableString * dateMutableStr = [[NSMutableString alloc]init];
     for (int i = 0; i < currentDateStr.length; i+=2) {
         NSString * subStr = [currentDateStr substringWithRange:NSMakeRange(i, 2)];
-        NSLog(@"====%02lx",(long)[subStr integerValue]);
-
         [dateMutableStr appendFormat:@"%02lx",(long)[subStr integerValue]];
     }
-
-    NSLog(@"%@",dateMutableStr);
 
     return dateMutableStr;
 }

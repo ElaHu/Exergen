@@ -35,7 +35,7 @@ static int i = 0;
 {
     if (self.discovedPeripheral) {
         if (_writeCharacter) {
-            [self.discovedPeripheral writeValue:data forCharacteristic:_writeCharacter type:CBCharacteristicWriteWithoutResponse];
+            [self.discovedPeripheral writeValue:data forCharacteristic:_writeCharacter type:CBCharacteristicWriteWithResponse];
         }
 
     }
@@ -187,7 +187,7 @@ static int i = 0;
 {
 
 
-    if ([peripheral.name hasPrefix:@"CosbeautySS"]) {
+    if ([peripheral.name hasPrefix:HeaderName]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"Connected3"];
     }
     if (self.delegate &&[self.delegate respondsToSelector:@selector(disconnectPeripheral:)]) {
@@ -205,7 +205,9 @@ static int i = 0;
         self.discovedPeripheral = peripheral;
 
         //发送时间
-        NSString * timeStr = [NSString stringWithFormat:@"FEFD%@%d0D0A",[CHInstruction getNowDateString],sheshi];
+        NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
+        NSLog(@"上传时间字符串^^^^^^^^^%@",timeStr);
+
         [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
 
     }
@@ -262,7 +264,8 @@ static int i = 0;
 
             if (self.histroryNum) {
 
-                NSLog(@"历史及数据 time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
+                NSLog(@"历史数据 time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
+
             }else{
 
                 NSLog(@"测量数据 time:%@--temp:%@",[CHInstruction timeAnalyse:timeData],[CHInstruction tempAnalyse:tempData]);
