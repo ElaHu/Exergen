@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#define Write_UUID @"01005970-6d75-4753-5053-676e6f6c7553"
-#define Observe_UUID @"02005970-6d75-4753-5053-676e6f6c7553"
+#define Write_UUID @"01005970-6D75-4753-5053-676E6F6C7553"
+#define Observe_UUID @"02005970-6D75-4753-5053-676E6F6C7553"
 
 #define  SERVICE_UUID@"00005970-6d75-4753-5053-676e6f6c7553"
 
@@ -34,7 +34,7 @@
 
 @end
 
-@interface CHCentralManager : NSObject
+@interface CHCentralManager : NSObject<CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (nonatomic,strong) CBCentralManager *centralManager;
 @property (nonatomic,strong) NSMutableArray *nDevices;

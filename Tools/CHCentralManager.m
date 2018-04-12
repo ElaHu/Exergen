@@ -118,7 +118,6 @@ static int i = 0;
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI
 {
 
-    NSLog(@"service_UUID--%@", [advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"]);
     if ([peripheral.name hasPrefix:HeaderName]) {
         NSLog(@"=======%@",peripheral);
         NSLog(@"&&&&&&&%@",advertisementData);
@@ -196,6 +195,7 @@ static int i = 0;
 
     NSLog(@"%@",service.characteristics);
     for (CBCharacteristic * c in service.characteristics) {
+        NSLog(@"UUID-----%@",[c.UUID.UUIDString uppercaseString]);
         if ([[c.UUID.UUIDString uppercaseString] isEqualToString: Write_UUID]) {
             //非常重要没有这句话无法调用下面的代理方法
             [peripheral setNotifyValue:YES forCharacteristic:c];
@@ -203,10 +203,10 @@ static int i = 0;
             self.discovedPeripheral = peripheral;
 
             //发送时间
-            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
-            NSLog(@"上传时间字符串=====%@",timeStr);
-
-            [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
+//            NSString * timeStr = [NSString stringWithFormat:@"FEFD%@1A0D0A",[CHInstruction getNowDateString]];
+//            NSLog(@"上传时间字符串=====%@",timeStr);
+//
+//            [peripheral writeValue:[Tool dataForHexString:timeStr] forCharacteristic:c type:CBCharacteristicWriteWithResponse];
 
         }
 
