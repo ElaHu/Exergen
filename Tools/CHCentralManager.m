@@ -270,7 +270,6 @@ static int i = 0;
                     self.histroryNum = 0;
                 }
 
-
             }else{
 
 
